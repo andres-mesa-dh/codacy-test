@@ -1,0 +1,19 @@
+os: linux
+dist: xenial
+language: java
+jdk: openjdk11
+
+services:
+  - docker
+
+cache:
+  directories:
+    - "$HOME/.m2/repository"
+    - "$HOME/.local"
+
+jobs:
+  include:
+    - stage: test
+      name: "Test"
+      script:
+        - mvn clean verify
