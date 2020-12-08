@@ -17,14 +17,4 @@ jobs:
       name: "Test"
       script:
         - mvn clean verify
-    - stage: deploy
-      name: "Deploy"
-      if: (branch = master)
-      script: mvn clean package
-      deploy:
-        skip_cleanup: true
-        provider: script
-          - bash <(curl -Ls https://coverage.codacy.com/get.sh) report
-        on:
-          branch: master
-          condition: ${TRAVIS_PULL_REQUEST} = false
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report
