@@ -27,7 +27,7 @@ public class EmployeeService {
             .collect(Collectors.toList());
     }
 
-    public EmployeeDto delete_employee(final Long id) {
+    public EmployeeDto deleteEmployee(final Long id) {
         return repository.findById(id)
             .map(EmployeeDto::new)
             .orElseThrow(() -> new NotFoundEmployee(id));

@@ -31,6 +31,6 @@ public class EmployeeController {
 
     @DeleteMapping("/{id}")
     public EmployeeDto deleteEmployee(@PathVariable final Long id) {
-        return employeeService.delete_employee(id);
+        return employeeService.deleteEmployee(id);
     }
 }
