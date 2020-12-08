@@ -61,4 +61,26 @@ public class Employee {
     public Integer getAge() {
         return age;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Employee employee = (Employee) o;
+
+        if (!name.equals(employee.name)) return false;
+        if (!lastName.equals(employee.lastName)) return false;
+        if (!birthDate.equals(employee.birthDate)) return false;
+        return age.equals(employee.age);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + birthDate.hashCode();
+        result = 31 * result + age.hashCode();
+        return result;
+    }
 }
