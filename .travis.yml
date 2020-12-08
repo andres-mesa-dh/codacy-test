@@ -17,3 +17,4 @@ jobs:
       name: "Test"
       script:
         - mvn clean verify
+        - bash <(curl -Ls https://coverage.codacy.com/get.sh) report
