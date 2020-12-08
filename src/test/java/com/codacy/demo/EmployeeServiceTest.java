@@ -75,11 +75,9 @@ class EmployeeServiceTest {
         doReturn(employeeList).when(repository).findAll();
 
         final List<EmployeeDto> resultList = service.getAllEmployees();
-        final List<EmployeeDto> expectedList = employeeList.stream().map(
-            it -> new EmployeeDto(
-                it.getName(), it.getLastName(), it.getBirthDate(), calculateAge(it.getBirthDate())
-            )
-        ).collect(Collectors.toList());
+        final List<EmployeeDto> expectedList = employeeList.stream()
+            .map(EmployeeDto::new)
+            .collect(Collectors.toList());
         assertIterableEquals(expectedList, resultList);
     }
 
@@ -87,11 +85,5 @@ class EmployeeServiceTest {
         return Date.from(
             LocalDate.parse(dateAsString).atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()
         );
-    }
-
-    private int calculateAge(final Date date) {
-        return Period.between(
-            date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now()
-        ).getYears();
     }
 }

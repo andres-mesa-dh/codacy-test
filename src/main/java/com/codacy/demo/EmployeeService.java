@@ -1,5 +1,6 @@
 package com.codacy.demo;
 
+import com.codacy.demo.exception.NotFoundEmployee;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -7,24 +8,28 @@ import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeRepository repository;
 
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeService(EmployeeRepository repository) {
+        this.repository = repository;
     }
 
     public void createEmployee(final EmployeeDto employeeDto) {
-        employeeRepository.save(new Employee(
+        repository.save(new Employee(
             employeeDto.getName(), employeeDto.getLastName(), employeeDto.getBirthDate()
         ));
     }
 
     public List<EmployeeDto> getAllEmployees() {
-        return employeeRepository.findAll()
+        return repository.findAll()
             .stream()
-            .map(it -> new EmployeeDto(
-                it.getName(), it.getLastName(), it.getBirthDate(), it.getAge()
-            ))
+            .map(EmployeeDto::new)
             .collect(Collectors.toList());
+    }
+
+    public EmployeeDto delete_employee(final Long id) {
+        return repository.findById(id)
+            .map(EmployeeDto::new)
+            .orElseThrow(() -> new NotFoundEmployee(id));
     }
 }

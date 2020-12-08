@@ -20,16 +20,11 @@ public class EmployeeDto {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer age;
 
-    public EmployeeDto(
-        final String name,
-        final String lastName,
-        final Date birthDate,
-        final Integer age
-    ) {
-        this.name = name;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.age = age;
+    public EmployeeDto(final Employee employee) {
+        this.name = employee.getName();
+        this.lastName = employee.getLastName();
+        this.birthDate = employee.getBirthDate();
+        this.age = employee.getAge();
     }
 
     public EmployeeDto(
