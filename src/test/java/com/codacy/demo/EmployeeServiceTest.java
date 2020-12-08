@@ -27,7 +27,7 @@ class EmployeeServiceTest {
     private EmployeeService service;
 
     @Test
-    void should_create_employee_when_dto_is_valid() {
+    void shouldCreateEmployeeWhenDtoIsValid() {
         ArgumentCaptor<Employee> employeeArgumentCaptor = ArgumentCaptor.forClass(Employee.class);
 
         doReturn(null).when(repository).save(employeeArgumentCaptor.capture());
@@ -50,7 +50,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_return_an_empty_list_when_no_saved_employees() {
+    void shouldReturnAnEmptyListWhenNoSavedEmployees() {
         doReturn(List.of()).when(repository).findAll();
 
         List<EmployeeDto> employeeDtoList = service.getAllEmployees();
@@ -59,7 +59,7 @@ class EmployeeServiceTest {
     }
 
     @Test
-    void should_return_list_employee_dto_when_saved_employees() {
+    void shouldReturnListEmployeeDtoWhenSavedEmployees() {
         final String name = "Name 1";
         final String lastName = "LastName 1";
         final Date birthDate = convertToDate("1993-07-23");
